@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+//void main() => runApp(MyApp());
 
 //class MyApp extends StatelessWidget{
 //  @override
@@ -229,42 +229,143 @@ void main() => runApp(MyApp());
 /**
  * 卡片组件布局
  */
-class MyApp extends StatelessWidget{
+//class MyApp extends StatelessWidget{
+//  @override
+//  Widget build(BuildContext context) {
+//    // TODO: implement build
+//    var card = new Card(
+//        child: Column(
+//            children: <Widget>[
+//                ListTile(
+//                    title: new Text('吉林省吉林市昌邑区',style: TextStyle(fontWeight: FontWeight.w500)),
+//                    subtitle: new Text('强利飞 7894561312'),
+//                    leading: new Icon(Icons.account_box,color: Colors.redAccent,),
+//                ),
+//                new Divider(),
+//                ListTile(
+//                    title: new Text('北京市海淀区中国科技大学',style: TextStyle(fontWeight: FontWeight.w500)),
+//                    subtitle: new Text('哈哈哈，12347898'),
+//                    leading: new Icon(Icons.account_box,color: Colors.lightBlue),
+//                ),
+//                new Divider(),
+//                ListTile(
+//                    title: new Text('河南省濮阳市办公楼',style: TextStyle(fontWeight: FontWeight.w500)),
+//                    subtitle: new Text('历史课，987546223'),
+//                    leading: Icon(Icons.account_box,color: Colors.green),
+//                )
+//            ],
+//        ),
+//    );
+//    return MaterialApp(
+//        title: '卡片式布局',
+//        home: Scaffold(
+//            appBar: new AppBar(
+//                title: new Text('卡片布局'),
+//            ),
+//            body: Center(child: card),
+//        ),
+//    );
+//  }
+//
+//}
+
+
+//void main(){
+//    runApp(MaterialApp(
+//        title: '导航演示1',
+//        home: new FirstScreen(),
+//    ));
+//}
+//
+//class FirstScreen extends StatelessWidget {
+//  @override
+//  Widget build(BuildContext context) {
+//    // TODO: implement build
+//    return new Scaffold(
+//        appBar: new AppBar(
+//            title: Text('导航页'),
+//        ),
+//        body: Center(
+//            child: RaisedButton(
+//              child: Text('查看商品详情页面'),
+//              onPressed: (){
+//                  Navigator.push(context, new MaterialPageRoute(
+//                      builder: (context) => new SecondScreen()
+//                  ));
+//              },
+//
+//            )
+//
+//        ),
+//    );
+//  }
+//
+//}
+//
+//class SecondScreen extends StatelessWidget{
+//  @override
+//  Widget build(BuildContext context) {
+//    // TODO: implement build
+//    return Scaffold(
+//        appBar: AppBar(
+//            title: Text('强利飞 的商品详情页'),
+//        ),
+//        body: Center(
+//            child: RaisedButton(
+//                onPressed: (){
+//                    Navigator.pop(context);
+//                },
+//                child: Text('返回')
+//            ),
+//        ),
+//    );
+//  }
+//}
+
+//Dart 中可以使用类来抽象一个数据
+class Product{
+    //商品标题
+    final String title;
+    //商品描述
+    final String description;
+    Product(this.title,this.description);
+}
+
+void main(){
+    runApp(MaterialApp(
+       title: '数据传递案例',
+       home: ProductList(
+          products:List.generate(
+            20,
+            (i) => Product('商品 $i','这是一个商品详情，编号为：$i'))
+       ),
+    ));
+}
+
+class ProductList extends StatelessWidget{
+  final List<Product> products;
+  ProductList({Key key,@required this.products}):super(key:key);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    var card = new Card(
-        child: Column(
-            children: <Widget>[
-                ListTile(
-                    title: new Text('吉林省吉林市昌邑区',style: TextStyle(fontWeight: FontWeight.w500)),
-                    subtitle: new Text('强利飞 7894561312'),
-                    leading: new Icon(Icons.account_box,color: Colors.redAccent,),
-                ),
-                new Divider(),
-                ListTile(
-                    title: new Text('北京市海淀区中国科技大学',style: TextStyle(fontWeight: FontWeight.w500)),
-                    subtitle: new Text('哈哈哈，12347898'),
-                    leading: new Icon(Icons.account_box,color: Colors.lightBlue),
-                ),
-                new Divider(),
-                ListTile(
-                    title: new Text('河南省濮阳市办公楼',style: TextStyle(fontWeight: FontWeight.w500)),
-                    subtitle: new Text('历史课，987546223'),
-                    leading: Icon(Icons.account_box,color: Colors.green),
-                )
-            ],
+    return Scaffold(
+        appBar: new AppBar(
+            title: Text('商品列表'),
         ),
-    );
-    return MaterialApp(
-        title: '卡片式布局',
-        home: Scaffold(
-            appBar: new AppBar(
-                title: new Text('卡片布局'),
-            ),
-            body: Center(child: card),
+        body: ListView.builder(
+            itemCount: products.length,
+            itemBuilder: (context,index){
+                new Divider();
+                return ListTile(
+                  title: Text(products[index].title),
+                  onTap: (){
+
+                  },
+
+                );
+            },
         ),
     );
   }
-
 }
